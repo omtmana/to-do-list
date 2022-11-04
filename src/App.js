@@ -1,23 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
+import React, {useState, useEffect} from 'react';
+
 
 function App() {
+  const [counter, setCounter] = useState(0)
+  const [data, setData] = useState('')
+
+  useEffect(() => {
+    fetch('https://randomuser.me/api')
+    .then(res => res.json())
+    .then((data) => console.log({data}))
+  }, {})
+
+  const handleDecrease = () => {
+    setCounter(() => counter - 1)
+  }
+
+  const handleIncrease = () => {
+    setCounter(() => counter + 1)
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={handleDecrease}>-</button>
+      <h1> {counter} </h1>
+      <button onClick={handleIncrease}>+</button>
+      <p>Hello</p>
     </div>
   );
 }
